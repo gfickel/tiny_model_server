@@ -1,0 +1,7 @@
+grpcio
+grpcio-testing
+grpcio-tools
+grpcio-health-checking
+numpy
+Pillow
+pytest

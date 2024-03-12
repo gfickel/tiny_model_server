@@ -1,0 +1,69 @@
+syntax = "proto3";
+
+package server;
+
+// Interface exported by the server.
+service Server {
+  rpc RunText(TextArgs) returns (Response) {}
+  rpc RunImage(ImageArgs) returns (Response) {}
+  rpc RunBatchText(BatchTextArgs) returns (Response) {}
+  rpc RunBatchImage(BatchImageArgs) returns (Response) {}
+  rpc ListModels(EmptyArgs) returns (Response) {}
+  rpc GetInputShape(StringArg) returns (Response) {}
+  rpc GetPID(EmptyArgs) returns (Response) {}
+  rpc GetNumParallelWorkers(EmptyArgs) returns (Response) {}
+  rpc StopServer(EmptyArgs) returns (Response) {}
+}
+
+message EmptyArgs { }
+
+message TextArgs {
+    string text = 1;
+    string model = 2;
+    string args = 3;
+}
+
+message ImageArgs {
+    NumpyImage image = 1;
+    string model = 2;
+    string args = 3;
+}
+
+message BatchTextArgs {
+    repeated string texts = 1;
+    string model = 2;
+    string args = 3;
+}
+
+message BatchImageArgs {
+    repeated NumpyImage images = 1;
+    string model = 2;
+    string args = 3;
+}
+
+message NumpyImage {
+    int32 height = 1;
+    int32 width = 2;
+    int32 channels = 3;
+    bytes data = 4;
+    string dtype = 5;
+}
+
+message StringArg {
+    string data = 1;
+}
+
+message Response {
+    string data = 1;
+}
+
+message ImageResponse {
+    string data = 1;
+    NumpyImage image = 2;
+}
+
+message Shape {
+    int32 height = 1;
+    int32 width = 2;
+    int32 channels = 3;
+}
