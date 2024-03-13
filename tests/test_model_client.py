@@ -2,6 +2,7 @@ import unittest
 import subprocess
 
 import numpy as np
+from grpc._channel import _InactiveRpcError
 
 from model_client import ModelClient
 
@@ -69,8 +70,13 @@ class TestModelClient(unittest.TestCase):
         res = model.stop_server()
         self.assertEqual(res, {'stopping': True})
 
-        res = model.get_input_shape()
-        self.assertEqual(res, [1080, 1920, 3])
+        # Wait for server to shutdown before setting it up again
+        while res is not None:
+            try:
+                res = model.get_input_shape()
+            except _InactiveRpcError:
+                res = None
+
         self.setup_class()
 
     def test_health(self):
