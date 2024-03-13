@@ -56,3 +56,11 @@ or
 ```sh
 make run_tests
 ```
+
+## Pending features
+
+There are many features and improvements that I wish to implement, and they should be somewhat straightforward. Some of them:
+
+- Route to process an image and return an image. Useful for image segmentation, optical flow (returning a HxWx2 np.float32 image, most likely), and other applications. I already added *ImageResponse* as a message on server.proto, I just need to implement a new route.
+- Better client-side load balancing. Round Robin is actually pretty good for most applications, but perhaps some server-side load metrics that are passed to the client could be used.
+- Some Kubernetes configs for easy horizontal scaling
