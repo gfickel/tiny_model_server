@@ -21,7 +21,7 @@ help:
 
 ## builds the protobuf related stuff
 build_server:
-	python -m grpc_tools.protoc -I. --python_out=./ --pyi_out=./ --grpc_python_out=./ erver.proto
+	python -m grpc_tools.protoc -I. --python_out=./ --pyi_out=./ --grpc_python_out=./ server.proto
 
 ## run the server
 run_server: build_server
